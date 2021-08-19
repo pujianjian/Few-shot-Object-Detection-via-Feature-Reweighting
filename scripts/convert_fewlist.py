@@ -5,7 +5,7 @@ import numpy as np
 from os import path
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--droot', type=str, default='/home/xing/workbook/DATASET/VOCData')
+parser.add_argument('--droot', type=str, default='/home/zdy/pujianjian/datasets/VOC')
 args = parser.parse_args()
 
 args.droot = args.droot.rstrip('/')

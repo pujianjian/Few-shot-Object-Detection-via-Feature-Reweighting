@@ -12,7 +12,7 @@ classes = ["aeroplane", "bicycle", "bird", "boat", "bottle",
 # few_nums = [1, 10]
 few_nums = [1, 2, 3, 5, 10]
 # few_nums = [20]
-DROOT = '/home/xing/workbook/DATASET/VOCData'
+DROOT = '/home/zdy/pujianjian/datasets/VOC'
 root =  DROOT + '/voclist/'
 rootfile =  DROOT + '/voc_train.txt'
 
