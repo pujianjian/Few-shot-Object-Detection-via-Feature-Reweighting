@@ -225,8 +225,12 @@ class Darknet(nn.Module):
                 kernel_size = int(block['size'])
                 stride = int(block['stride'])
                 is_pad = int(block['pad'])
-                pad = (kernel_size-1)//2 if is_pad else 0
+                if is_pad == 2:
+                    pad = is_pad
+                else:
+                    pad = (kernel_size-1)//2 if is_pad else 0
                 activation = block['activation']
+                dilation = int(block['dilation'])
                 groups = 1
                 bias = bool(int(block['bias'])) if 'bias' in block else True
 
@@ -241,11 +245,11 @@ class Darknet(nn.Module):
 
                 model = nn.Sequential()
                 if batch_normalize:
-                    model.add_module('conv{0}'.format(conv_id),Conv2d(prev_filters, filters, kernel_size, stride, pad, groups=groups, bias=False))
+                    model.add_module('conv{0}'.format(conv_id),Conv2d(prev_filters, filters, kernel_size, stride, pad, groups=groups, bias=False,dilation=dilation))
                     model.add_module('bn{0}'.format(conv_id),nn.BatchNorm2d(filters))
                     #model.add_module('bn{0}'.format(conv_id), BN2d(filters))
                 else:
-                    model.add_module('conv{0}'.format(conv_id),Conv2d(prev_filters, filters, kernel_size, stride, pad, groups=groups, bias=bias))
+                    model.add_module('conv{0}'.format(conv_id),Conv2d(prev_filters, filters, kernel_size, stride, pad, groups=groups, bias=bias,dilation=dilation))
                 if activation == 'leaky':
                     model.add_module('leaky{0}'.format(conv_id), nn.LeakyReLU(0.1, inplace=True))
                 elif activation == 'relu':

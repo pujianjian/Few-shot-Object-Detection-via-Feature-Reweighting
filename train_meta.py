@@ -11,11 +11,12 @@ from scripts.utils import *
 from cfg.cfg import parse_cfg, cfg
 from models.darknet_meta import Darknet
 
-
+print(">>>>>>>>>>>>>>>>>>>>>>")
 if len(sys.argv) != 5:
     print('Usage:')
     print('python train.py [datacfg] [darknetcfg] [learnetcfg] [weightfile]')
     exit()
+
 
 
 ##############################################################################################
@@ -82,7 +83,7 @@ iou_thresh    = 0.5
 model       = Darknet(darknetcfg, learnetcfg)
 region_loss = model.loss
 model.load_weights(weightfile)
-#model.print_network()
+model.print_network()
 
 # Meta-model parameters
 region_loss.seen  = model.seen
@@ -125,6 +126,7 @@ def adjust_learning_rate(optimizer, batch):
     return lr
 
 
+#122222
 ##############################################################################################
 #  training method
 ##############################################################################################
